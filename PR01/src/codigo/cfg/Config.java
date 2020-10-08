@@ -60,33 +60,35 @@ public class Config {
 			  Element config = doc.createElement("configuration");
 			  doc.appendChild(config);		
 			  
-			  Attr attr = doc.createAttribute("conexion");
+			  Element conex = doc.createElement("conexion"); 			  
+			  Attr attr = doc.createAttribute("value");
 			  attr.setValue("jdbc:sqlite:sample.db");
-			  config.setAttributeNode(attr);
+			  conex.setAttributeNode(attr);
+			  config.appendChild(conex);	 
 			  
 			  
 			  Element queries = doc.createElement("queries");
 			  config.appendChild(queries);		
 			  
-			  Attr query01 = doc.createAttribute("query");
-			  query01.setValue("CREATE TABLE IF NOT EXISTS 'person' ("
+			  Element query01 = doc.createElement("query");
+			  query01.appendChild(doc.createTextNode("CREATE TABLE IF NOT EXISTS 'person' ("
 						+ "	'id'	INTEGER,"
 						+ "	'name'	string,"
 						+ "	'lastname'	TEXT,"
 						+ "	PRIMARY KEY('id' AUTOINCREMENT)"
-						+ ")");
-			  queries.setAttributeNode(query01);
+						+ ")"));
+			  queries.appendChild(query01);	  
 			  
-			  Attr query02 = doc.createAttribute("query");
-			  query02.setValue("CREATE TABLE IF NOT EXISTS 'producto' ("
+			  Element query02 = doc.createElement("query");
+			  query02.appendChild(doc.createTextNode("CREATE TABLE IF NOT EXISTS 'producto' ("
 						+ "	'id'	INTEGER,"
 						+ "	'name'	TEXT,"
 						+ "	'desc'	TEXT,"
 						+ "	'precio' INTEGER DEFAULT 0,"
 						+ "	'stock'	INTEGER DEFAULT 1,"
 						+ "	PRIMARY KEY('id' AUTOINCREMENT)"
-						+ ")");
-			  queries.setAttributeNode(query02);
+						+ ")"));
+			  queries.appendChild(query02);	   
 			  
 			   
 			  
@@ -95,11 +97,15 @@ public class Config {
 			  TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			  Transformer transformer = transformerFactory.newTransformer();
 			  DOMSource source = new DOMSource(doc);
-			  File file = new File("config.xml");
-			  StreamResult result = new StreamResult(file);			  
 			  
-			  System.out.println(result);
+			  File file = new File("config.xml");
+			  StreamResult result = new StreamResult(file);		 
+
+			  transformer.transform(source, result);
+			   
 			  System.out.println(file.getAbsolutePath());
+			  
+			  System.out.println("FILE EXISTS: "+file.exists());
 			  
 			  return doc;
 		}catch(Exception e) {
