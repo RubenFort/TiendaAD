@@ -12,8 +12,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import codigo.db.Conexion;
+import codigo.db.ConfigDB;
 
 public class Config { 
 	
@@ -37,19 +39,39 @@ public class Config {
 		File file = new File(CONFIG_FILE);
 		if (file.exists()) {
 			// Cargamos la Config
-			configFile = loadDocument();
+			configFile = loadDocument(file);
 		}else {
 			// Creamos la Config
-			configFile = createDocument();
+			configFile = createDocument(file);
 		}
 	}
 	
-	private Document loadDocument() {
-		// TODO Auto-generated method stub
+	private Document loadDocument(File file) { 
+		
+		try {
+			  DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			  DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			  Document doc = dBuilder.parse(file);
+			  
+			  
+			  NodeList nList = doc.getElementsByTagName("conexion");
+			  if (nList.getLength() > 0) {
+				  Node data = nList.item(0);
+				  String value = data.getTextContent();
+				  ConfigDB.setDBConexion(value);
+			  }
+			  
+			  
+			  // getTextContent
+			  
+			} catch(Exception e) {
+			  e.printStackTrace();
+			}
+		
 		return null;
 	}
 
-	private Document createDocument() {
+	private Document createDocument(File file) {
 		
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -98,7 +120,7 @@ public class Config {
 			  Transformer transformer = transformerFactory.newTransformer();
 			  DOMSource source = new DOMSource(doc);
 			  
-			  File file = new File("config.xml");
+			  
 			  StreamResult result = new StreamResult(file);		 
 
 			  transformer.transform(source, result);
