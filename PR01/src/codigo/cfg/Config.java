@@ -82,10 +82,8 @@ public class Config {
 			  Element config = doc.createElement("configuration");
 			  doc.appendChild(config);		
 			  
-			  Element conex = doc.createElement("conexion"); 			  
-			  Attr attr = doc.createAttribute("value");
-			  attr.setValue("jdbc:sqlite:sample.db");
-			  conex.setAttributeNode(attr);
+			  Element conex = doc.createElement("conexion"); 	 
+			  conex.appendChild(doc.createTextNode("jdbc:sqlite:sample.db"));
 			  config.appendChild(conex);	 
 			  
 			  
