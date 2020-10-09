@@ -13,11 +13,20 @@ public class Conexion {
 
 	private Conexion() {
 		try {
-			connection = DriverManager.getConnection(ConfigDB.DB_CONEXION);
+			//Class.forName(ConfigDB.DB_DRIVER);
+			Class.forName("com.mysql.jdbc.Driver");
+			String host = ConfigDB.DB_HOST;
+			String user = ConfigDB.DB_USER;
+			String pass = ConfigDB.DB_PASS;
+			System.out.println("DB_HOST: "+host);
+			System.out.println("DB_USER: "+user);
+			System.out.println("DB_PASS: "+pass);
+			connection = DriverManager.getConnection(host, user, pass);
+			//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clase", "root", "A.joker.1");
 			initiateDatabase();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}  
 		
 		
 	}

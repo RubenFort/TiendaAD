@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
-	<conexion value="">jdbc:sqlite:sample.db</conexion>
+	<conexion>
+		<driver>com.mysql.jdbc.Driver</driver>
+		<host>jdbc:mysql://127.0.0.1:3306/clase</host>
+		<user>root</user>
+		<pass>A.joker.1</pass>
+	</conexion>
+
 	<queries>
 		<query>CREATE TABLE IF NOT EXISTS 'person' (	'id'	INTEGER,	'name'	string,	'lastname'	TEXT,	PRIMARY KEY('id' AUTOINCREMENT))</query>
 		<query>CREATE TABLE IF NOT EXISTS 'producto' (	'id'	INTEGER,	'name'	TEXT,	'desc'	TEXT,	'precio' INTEGER DEFAULT 0,	'stock'	INTEGER DEFAULT 1,	PRIMARY KEY('id' AUTOINCREMENT))</query>

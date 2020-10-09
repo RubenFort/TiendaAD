@@ -56,8 +56,30 @@ public class Config {
 			  NodeList nList = doc.getElementsByTagName("conexion");
 			  if (nList.getLength() > 0) {
 				  Node data = nList.item(0);
-				  String value = data.getTextContent();
-				  ConfigDB.setDBConexion(value);
+				  String driver = "";
+				  String host = "";
+				  String user = "";
+				  String pass = "";
+				  if (data.hasChildNodes()) {
+					  NodeList childs = data.getChildNodes();
+					  for (int idx = 0; idx < childs.getLength(); idx++) {
+						  Node item = childs.item(idx); 
+						  String name = item.getNodeName();
+						  if (name.equals("driver")) {
+							  driver = item.getTextContent();
+						  }
+						  if (name.equals("host")) {
+							  host = item.getTextContent();
+						  }
+						  if (name.equals("user")) {
+							  user = item.getTextContent();		  
+						  }
+						  if (name.equals("pass")) {
+							  pass = item.getTextContent();
+						  }
+					  }
+				  } 
+				  ConfigDB.setDBConexion(driver, host, user, pass);
 			  }
 			  
 			  nList = doc.getElementsByTagName("queries");
