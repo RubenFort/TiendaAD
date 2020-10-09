@@ -37,13 +37,12 @@ public class Config {
 	
 	private void checkConfigFile(){
 		File file = new File(CONFIG_FILE);
-		if (file.exists()) {
-			// Cargamos la Config
-			configFile = loadDocument(file);
-		}else {
+		if (!file.exists()) { 
 			// Creamos la Config
 			configFile = createDocument(file);
 		}
+		// Cargamos la Config
+		configFile = loadDocument(file);
 	}
 	
 	private Document loadDocument(File file) { 
@@ -59,6 +58,18 @@ public class Config {
 				  Node data = nList.item(0);
 				  String value = data.getTextContent();
 				  ConfigDB.setDBConexion(value);
+			  }
+			  
+			  nList = doc.getElementsByTagName("queries");
+			  if (nList.getLength() > 0) {
+				  Node data = nList.item(0);
+				  if (data.hasChildNodes()) {
+					  NodeList childs = data.getChildNodes();
+					  for (int idx = 0; idx < childs.getLength(); idx++) {
+						  Node item = childs.item(idx); 
+						  ConfigDB.addQuery( item.getTextContent() );
+					  }
+				  }
 			  }
 			  
 			  
