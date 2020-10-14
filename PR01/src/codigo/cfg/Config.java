@@ -79,6 +79,7 @@ public class Config {
 						  }
 					  }
 				  } 
+				  // Configurar la conexion de base de datos
 				  ConfigDB.setDBConexion(driver, host, user, pass);
 			  }
 			  
@@ -92,6 +93,7 @@ public class Config {
 						  String query = item.getTextContent();
 						  query = query.replaceAll("\\r\\n|\\r|\\n|\\t","").trim();
 						  if (!query.isEmpty()) {
+							  // Consultas de creación de la base de datos
 							  ConfigDB.addQuery( query );
 						  } 
 					  }
