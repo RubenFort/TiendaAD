@@ -7,7 +7,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamResult; 
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -89,7 +89,11 @@ public class Config {
 					  NodeList childs = data.getChildNodes();
 					  for (int idx = 0; idx < childs.getLength(); idx++) {
 						  Node item = childs.item(idx); 
-						  ConfigDB.addQuery( item.getTextContent() );
+						  String query = item.getTextContent();
+						  query = query.replaceAll("\\r\\n|\\r|\\n|\\t","").trim();
+						  if (!query.isEmpty()) {
+							  ConfigDB.addQuery( query );
+						  } 
 					  }
 				  }
 			  }

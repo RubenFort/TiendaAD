@@ -10,8 +10,7 @@ import codigo.models.Persona;
 public class Principal {
 
 	public static void main(String[] args) { 
-		
-		
+				
 		Config.getInstance();
 		
 		try {
