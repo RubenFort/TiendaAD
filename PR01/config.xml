@@ -5,11 +5,12 @@
 		<driver>com.mysql.jdbc.Driver</driver>
 		<host>jdbc:mysql://127.0.0.1:3306/clase?useSSL=false</host>
 		<user>root</user>
-		<pass>A.joker.1</pass>
+		<pass>1234abc.</pass>
 	</conexion>
 
 	<queries>
-		<query>CREATE TABLE `person` (`id` INT NOT NULL,`name` VARCHAR(50) NOT NULL DEFAULT '',`lastname` VARCHAR(50) NOT NULL DEFAULT '',	PRIMARY KEY (`id`))COLLATE='latin1_spanish_ci';</query>
-		<query>CREATE TABLE IF NOT EXISTS 'producto' (	'id'	INTEGER,	'name'	TEXT,	'desc'	TEXT,	'precio' INTEGER DEFAULT 0,	'stock'	INTEGER DEFAULT 1,	PRIMARY KEY('id' AUTOINCREMENT))</query>
+		<query>CREATE TABLE IF NOT EXISTS`person` (`id` INT NOT NULL AUTO_INCREMENT,`name` VARCHAR(50) NOT NULL DEFAULT '',`lastname` VARCHAR(50) NOT NULL DEFAULT '', PRIMARY KEY (`id`))COLLATE='utf8_spanish_ci';</query>
+		<query>CREATE TABLE IF NOT EXISTS`producto` (`id` INT NOT NULL AUTO_INCREMENT,`nombre` VARCHAR(50) NOT NULL DEFAULT '',`descr` VARCHAR(50) NOT NULL DEFAULT '',`precio` INT NULL DEFAULT '0',`stock` INT NOT NULL DEFAULT '1', PRIMARY KEY (`id`))COLLATE='utf8_spanish_ci';</query>
+		<query>CREATE TABLE IF NOT EXISTS`usuario` (`id` INT NOT NULL AUTO_INCREMENT,`nombre` VARCHAR(50) NOT NULL DEFAULT '',`password` VARCHAR(50) NOT NULL DEFAULT '',PRIMARY KEY (`id`))COLLATE='utf8_spanish_ci';</query>
 	</queries>
 </configuration>

@@ -12,15 +12,15 @@ public class Producto extends DbObject{
 	private static final ArrayList COLS = getArrayCols();
 
 	private int id = 0;
-	private String name = "";
-	private String desc = "";
-	private int precio = 0; 
-	private int stock = 1;
+	public String nombre = "";
+	public String descr = "";
+	public int precio = 0; 
+	public int stock = 1;
 	
 	private static ArrayList getArrayCols() {
 		ArrayList list = new ArrayList();
-		list.add("name");
-		list.add("desc"); 
+		list.add("nombre");
+		list.add("descr"); 
 		list.add("precio");
 		list.add("stock"); 
 		return list;
@@ -33,16 +33,16 @@ public class Producto extends DbObject{
 		this.stock = stock;
 	}
 	public String getName() {
-		return name;
+		return nombre;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String nombre) {
+		this.nombre = nombre;
 	}
 	public String getDesc() {
-		return desc;
+		return descr;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDesc(String descr) {
+		this.descr = descr;
 	}
 	/**
 	 * 
@@ -79,8 +79,8 @@ public class Producto extends DbObject{
 	@Override
 	public ArrayList getValues() {
 		ArrayList list = new ArrayList();
-		list.add(this.name);
-		list.add(this.desc);
+		list.add(this.nombre);
+		list.add(this.descr);
 		list.add(this.precio);
 		list.add(this.stock);
 		
@@ -89,8 +89,13 @@ public class Producto extends DbObject{
 
 	@Override
 	public DbObject parse(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Producto prod = new Producto();
+		prod.id = rs.getInt("id");
+		prod.nombre = rs.getString("nombre");
+		prod.descr = rs.getString("descr");
+		prod.precio = rs.getInt("precio");
+		prod.stock = rs.getInt("stock");
+		return prod;
 	}
 
 }
