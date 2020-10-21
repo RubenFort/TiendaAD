@@ -18,9 +18,9 @@ public class Conexion {
 			String host = ConfigDB.DB_HOST;
 			String user = ConfigDB.DB_USER;
 			String pass = ConfigDB.DB_PASS;
-			System.out.println("DB_HOST: "+host);
-			System.out.println("DB_USER: "+user);
-			System.out.println("DB_PASS: "+pass);  
+//			System.out.println("DB_HOST: "+host);
+//			System.out.println("DB_USER: "+user);
+//			System.out.println("DB_PASS: "+pass);  
 			
 			connection = DriverManager.getConnection(host, user, pass);
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clase", "root", "A.joker.1");
